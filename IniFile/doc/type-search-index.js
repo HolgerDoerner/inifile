@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.inifile","l":"DuplicateEntryException"},{"p":"com.inifile","l":"IniFile"},{"p":"com.inifile","l":"IniFiles"}]
