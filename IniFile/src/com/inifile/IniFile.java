@@ -5,7 +5,7 @@ import java.util.Set;
 
 /**
  * <p>
- * Holds the Contents of an .INI-File
+ * Holds the Contents of an .INI-File.
  * </p>
  * 
  * @author Holger Dörner
