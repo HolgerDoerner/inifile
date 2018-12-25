@@ -1,0 +1,97 @@
+package com.inifile;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+/**
+ * <p>
+ * Class for obtaining IniFile-Instances using Factory-Methods.
+ * </p>
+ * 
+ * @author Holger Dörner
+ * @version 1.0
+ * @see com.inifile.IniFile
+ */
+public final class IniFiles {
+	// private constructor
+	private IniFiles() {}
+	
+	public static final IniFile load(String file) throws IOException {
+		return load(Paths.get(file));
+	}
+	
+	public static final IniFile load(File file) throws IOException {
+		return load(file.toPath());
+	}
+
+	public static final IniFile load(Path file) throws IOException {
+		Map<String, Map<String, String>> tmpSettings = new HashMap<>();
+		List<String> sectionNames = new ArrayList<>();
+		List<List<String[]>> entryPairs = new ArrayList<>();
+		
+		List<String> lines = Files.readAllLines(file);
+		
+		for (String s : lines) {
+			if (s.isBlank() || s.startsWith(";") || s.startsWith("#")) {}
+			else if (s.startsWith("[") & s.endsWith("]")) {
+				String tmp = s.substring(1, s.length()-1).trim();
+				
+				if (sectionNames.contains(tmp)) throw new DuplicateEntryException("Dublicate of Section '" + tmp + "'");
+				
+				sectionNames.add(tmp);
+				entryPairs.add(sectionNames.size()-1, new ArrayList<>());
+			}
+			else {
+				String[] tmp = s.split("=");
+				
+				if (entryPairs.get(sectionNames.size()-1).stream().filter(e -> e[0].equals(tmp[0])).count() > 0)
+					throw new DuplicateEntryException("Dublicate of Key '" + tmp[0] + "'");
+				
+				entryPairs.get(sectionNames.size()-1).add(tmp);
+			}
+		}
+		
+		for (int i = 0; i < sectionNames.size(); i++) {
+			tmpSettings.put(sectionNames.get(i), entryPairs.get(i).stream()
+					.collect(Collectors.toMap(e -> e[0].replaceAll("'", "").replaceAll("\"", "").trim(),
+							e -> e[1].replaceAll("'", "").replaceAll("\"", "").trim())));
+		}
+		
+		return getNewIniFileInstance(tmpSettings);
+	}
+	
+	private static final IniFile getNewIniFileInstance(final Map<String, Map<String, String>> initialSettings) {
+		return new IniFile() {
+			private final Map<String, Map<String, String>> settings = new HashMap<>(initialSettings);
+			
+			@Override
+			public final Map<String, Map<String, String>> getContent() {
+				return this.settings;
+			}
+
+			@Override
+			public final Map<String, String> getEntrysBySection(String section) {
+				return this.settings.getOrDefault(section, null);
+			}
+
+			@Override
+			public final String getValue(String section, String key) {
+				return this.settings.getOrDefault(section, null).getOrDefault(key, null);
+			}
+			
+			@Override
+			public final Set<String> getSectionNames() {
+				return this.settings.keySet();
+			}
+		};
+	}
+}
