@@ -26,14 +26,20 @@ public final class IniFiles {
 	private IniFiles() {}
 	
 	public static final IniFile load(String file) throws IOException {
+		if (file == null) throw new IllegalArgumentException("Argument cannot be null!");
+		
 		return load(Paths.get(file));
 	}
 	
 	public static final IniFile load(File file) throws IOException {
+		if (file == null) throw new IllegalArgumentException("Argument cannot be null!");
+		
 		return load(file.toPath());
 	}
 
 	public static final IniFile load(Path file) throws IOException {
+		if (file == null) throw new IllegalArgumentException("Argument cannot be null!");
+		
 		Map<String, Map<String, String>> tmpSettings = new HashMap<>();
 		List<String> sectionNames = new ArrayList<>();
 		List<List<String[]>> entryPairs = new ArrayList<>();
