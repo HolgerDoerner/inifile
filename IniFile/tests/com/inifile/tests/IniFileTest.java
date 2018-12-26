@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.tests;
+package com.inifile.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,8 +19,12 @@ import com.inifile.IniFile;
 import com.inifile.IniFiles;
 
 /**
- * @author hdoerner
- *
+ * <p>
+ * JUnit-Tests for {@code com.inifile.IniFile}
+ * </p>
+ * 
+ * @author Holger Dörner
+ * @see com.inifile.IniFile
  */
 @TestInstance(Lifecycle.PER_CLASS)
 class IniFileTest {
