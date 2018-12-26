@@ -1,12 +1,18 @@
 # IniFile
 
-*Small Java-Library for processing ini-Files.*
+### Table of Contents
+
+1. [Description](#description)
+2. [Installation](#installation)
+3. [Usage](#usage)
 
 ## Description
 
+Small Java-Library for processing ini-Files.
+
 The Factory `IniFiles` for parsing ini-Files and obtaining Objects of type `IniFile`, witch is an Interface.
 
-## Installation
+## Installation 
 
 Clone the Repository and build from Source.
 
