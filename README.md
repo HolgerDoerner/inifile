@@ -21,7 +21,7 @@ Binary jar-Files will also be provided in future :smile:
 try {
 	IniFile ini = IniFiles.load("/path/to/file.ini");
 }
-catch (IOEception e) {
+catch (IOException e) {
 	// handling of Exception...
 }
 ```
