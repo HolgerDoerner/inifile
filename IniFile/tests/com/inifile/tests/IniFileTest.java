@@ -55,6 +55,7 @@ class IniFileTest {
 	void testGetValue() {
 		assertEquals("2", ini.getValue("Main", "Two"));
 		assertEquals("value 3", ini.getValue("Section_2", "key_3"));
+		assertEquals("valueWithStupidSeparators", ini.getValue("Section 3", "another key with spaces"));
 	}
 
 	/**
