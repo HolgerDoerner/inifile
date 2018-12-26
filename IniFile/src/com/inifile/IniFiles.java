@@ -27,7 +27,7 @@ public final class IniFiles {
 	
 	/**
 	 * 
-	 * @param file a {@code java.lang.String} representing a File
+	 * @param file a {@code java.lang.String} representing a Filepath
 	 * @return an instance of {@code com.inifile.IniFile}
 	 * @throws IOException
 	 * @see com.inifile.IniFile
