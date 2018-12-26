@@ -16,7 +16,7 @@ Download JAR-File:
 
 Filename | Version | Date | Binary | Source | Javadoc | SHA-1
 -------- | ------- | ---- | ------ | ------ | ------- | -----
-<a href="data:application/octet-stream,DATA" download="IniFile/jar/IniFile-1.0-FULL.jar">IniFile-1.0-FULL.jar</a> | 1.0 | 2018-12-26 | *Yes* | *Yes* | *Yes* | 98303ad4fe1066b0cf8a03b542bbd87f49fc07ae
+[IniFile-1.0-FULL.jar](IniFile/jar/IniFile-1.0-FULL.jar) | 1.0 | 2018-12-26 | *Yes* | *Yes* | *Yes* | 98303ad4fe1066b0cf8a03b542bbd87f49fc07ae
 
 **Requires:** *Java 1.8+* (in fact, it is developed using JDK-11)
 
