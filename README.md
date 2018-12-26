@@ -14,9 +14,9 @@ Clone the Repository and build from Source.
 
 Download JAR-File:
 
-Filename | Version | Date | Supported OS | Binary | Source | Javadoc | SHA256SUM
--------- | ------- | ---- | ------------ | ------ | ------ | ------- | ---------
-[IniFile-1.0-FULL.jar](jar/IniFile-1.0-FULL.jar) | 1.0 | 2018-12-26 | *ALL* | *Yes* | *Yes* | *Yes* | fb63d241995d126ec6eb33a2b6e27be9297ba3d38962fe8964ebe065034329e8
+Filename | Version | Date | Binary | Source | Javadoc | SHA-1
+-------- | ------- | ---- | ------ | ------ | ------- | -----
+[IniFile-1.0-FULL.jar](IniFile/jar/IniFile-1.0-FULL.jar) | 1.0 | 2018-12-26 | *ALL* | *Yes* | *Yes* | *Yes* | 98303ad4fe1066b0cf8a03b542bbd87f49fc07ae
 
 **Requires:** *Java 1.8+* (in fact, it is developed using JDK-11)
 
