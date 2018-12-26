@@ -70,7 +70,11 @@ public final class IniFiles {
 		for (String s : lines) {
 			if (s.isBlank() || s.startsWith(";") || s.startsWith("#")) {}
 			else if (s.startsWith("[") & s.endsWith("]")) {
-				String tmp = s.substring(1, s.length()-1).trim();
+				String tmp = s.substring(1, s.length()-1)
+						.replaceAll("'", "")
+						.replaceAll("\"", "")
+						.replaceAll("\\|", "")
+						.trim();
 				
 				if (sectionNames.contains(tmp)) throw new DuplicateEntryException("Dublicate of Section '" + tmp + "'");
 				
@@ -89,8 +93,8 @@ public final class IniFiles {
 		
 		for (int i = 0; i < sectionNames.size(); i++) {
 			tmpSettings.put(sectionNames.get(i), entryPairs.get(i).stream()
-					.collect(Collectors.toMap(e -> e[0].replaceAll("'", "").replaceAll("\"", "").trim(),
-							e -> e[1].replaceAll("'", "").replaceAll("\"", "").trim())));
+					.collect(Collectors.toMap(e -> e[0].replaceAll("'", "").replaceAll("\"", "").replaceAll("\\|", "").trim(),
+							e -> e[1].replaceAll("'", "").replaceAll("\"", "").replaceAll("\\|", "").trim())));
 		}
 		
 		return getNewIniFileInstance(tmpSettings);
