@@ -63,7 +63,7 @@ class IniFileTest {
 	 */
 	@Test
 	void testGetSectionNames() {
-		assertTrue(ini.getSectionNames().contains("Main"));
+		assertTrue(ini.getSectionNames().size() == 3);
 		assertTrue(ini.getSectionNames().contains("Section_2"));
 	}
 
