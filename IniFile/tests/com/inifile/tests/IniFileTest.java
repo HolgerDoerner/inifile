@@ -32,7 +32,7 @@ class IniFileTest {
 	
 	@BeforeAll
 	void init() throws IOException {
-		ini = IniFiles.load(Paths.get("test.ini"));
+		ini = IniFiles.load(Paths.get("tests/test.ini"));
 	}
 	
 	/**

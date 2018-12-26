@@ -33,7 +33,7 @@ class IniFilesTest {
 		IniFile ini = null;
 		
 		try {
-			ini = IniFiles.load("test.ini");
+			ini = IniFiles.load("tests/test.ini");
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -49,7 +49,7 @@ class IniFilesTest {
 		IniFile ini = null;
 		
 		try {
-			ini = IniFiles.load(new File("test.ini"));
+			ini = IniFiles.load(new File("tests/test.ini"));
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -65,7 +65,7 @@ class IniFilesTest {
 		IniFile ini = null;
 		
 		try {
-			ini = IniFiles.load(Paths.get("test.ini"));
+			ini = IniFiles.load(Paths.get("tests/test.ini"));
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
