@@ -25,18 +25,39 @@ public final class IniFiles {
 	// private constructor
 	private IniFiles() {}
 	
+	/**
+	 * 
+	 * @param file a {@code java.lang.String} representing a File
+	 * @return an instance of {@code com.inifile.IniFile}
+	 * @throws IOException
+	 * @see com.inifile.IniFile
+	 */
 	public static final IniFile load(String file) throws IOException {
 		if (file == null) throw new IllegalArgumentException("Argument cannot be null!");
 		
 		return load(Paths.get(file));
 	}
 	
+	/**
+	 * 
+	 * @param file a {@code java.io.File} representing a File
+	 * @return an instance of {@code com.inifile.IniFile}
+	 * @throws IOException
+	 * @see com.inifile.IniFile
+	 */
 	public static final IniFile load(File file) throws IOException {
 		if (file == null) throw new IllegalArgumentException("Argument cannot be null!");
 		
 		return load(file.toPath());
 	}
 
+	/**
+	 * 
+	 * @param file a {@code java.nio.file.Path} representing a File
+	 * @return an instance of {@code com.inifile.IniFile}
+	 * @throws IOException
+	 * @see com.inifile.IniFile
+	 */
 	public static final IniFile load(Path file) throws IOException {
 		if (file == null) throw new IllegalArgumentException("Argument cannot be null!");
 		
@@ -75,9 +96,18 @@ public final class IniFiles {
 		return getNewIniFileInstance(tmpSettings);
 	}
 	
-	private static final IniFile getNewIniFileInstance(final Map<String, Map<String, String>> initialSettings) {
+	/**
+	 * <p>
+	 * Factory-Method for generating an anonymous instance of {@code com.inifile.IniFile}
+	 * </p>
+	 * 
+	 * @param _initialSettings_ a {@code Map<String, Map<String, String>>} read from an ini-file
+	 * @return a anonymous instance of {@code com.inifile.IniFile}
+	 * @see com.inifile.IniFile
+	 */
+	private static final IniFile getNewIniFileInstance(final Map<String, Map<String, String>> _initialSettings_) {
 		return new IniFile() {
-			private final Map<String, Map<String, String>> settings = new HashMap<>(initialSettings);
+			private final Map<String, Map<String, String>> settings = new HashMap<>(_initialSettings_);
 			
 			@Override
 			public final Map<String, Map<String, String>> getContent() {
