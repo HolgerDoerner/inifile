@@ -3,7 +3,7 @@
 ### Table of Contents
 
 1. [Description](#description)
-2. [Installation](#installation)
+2. [Installation](#requirements)
 3. [Usage](#usage)
 
 ## Description
@@ -12,19 +12,9 @@ Small Java-Library for processing ini-Files.
 
 The Factory `IniFiles` for parsing ini-Files and obtaining Objects of type `IniFile`, witch is an Interface.
 
-## Installation 
+## Requirements
 
-Clone the Repository and build from Source.
-
-**OR**
-
-Download JAR-File:
-
-Filename | Version | Date | Binary | Source | Javadoc | SHA-1
--------- | ------- | ---- | ------ | ------ | ------- | -----
-[IniFile-1.0-FULL.tar.gz](Downloads/IniFile-1.0-FULL.tar.gz) | 1.0 | 2018-12-27 | *Yes* | *Yes* | *Yes* | 06207e237ec7a8392d982ae8b5197e4033b2711e
-
-**Requires:** *Java 1.8+* (in fact, it is developed using JDK-11)
+**Minimum Java-Version:** *1.8* (in fact, it is developed using OpenJDK-11)
 
 **External Dependencies:** *None* 
 
