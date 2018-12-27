@@ -22,7 +22,7 @@ Download JAR-File:
 
 Filename | Version | Date | Binary | Source | Javadoc | SHA-1
 -------- | ------- | ---- | ------ | ------ | ------- | -----
-[IniFile-1.0-FULL.zip](Downloads/IniFile-1.0-FULL.zip) | 1.0 | 2018-12-26 | *Yes* | *Yes* | *Yes* | 22548b9c3dd4a4eada95c83b77a2903851bfbf05
+[IniFile-1.0-FULL.zip](Downloads/IniFile-1.0-FULL.tar.gz) | 1.0 | 2018-12-27 | *Yes* | *Yes* | *Yes* | 06207e237ec7a8392d982ae8b5197e4033b2711e
 
 **Requires:** *Java 1.8+* (in fact, it is developed using JDK-11)
 
