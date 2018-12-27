@@ -79,7 +79,7 @@ public final class IniFiles {
 				if (sectionNames.contains(tmp)) throw new DuplicateEntryException("Dublicate of Section '" + tmp + "'");
 				
 				sectionNames.add(tmp);
-				entryPairs.add(sectionNames.size()-1, new ArrayList<>());
+				entryPairs.add(new ArrayList<>());
 			}
 			else {
 				String[] tmp = s.split("=");
@@ -93,8 +93,17 @@ public final class IniFiles {
 		
 		for (int i = 0; i < sectionNames.size(); i++) {
 			tmpSettings.put(sectionNames.get(i), entryPairs.get(i).stream()
-					.collect(Collectors.toMap(e -> e[0].replaceAll("'", "").replaceAll("\"", "").replaceAll("\\|", "").trim(),
-							e -> e[1].replaceAll("'", "").replaceAll("\"", "").replaceAll("\\|", "").trim())));
+					.collect(Collectors.toMap(e -> {
+						if((e[0].trim().startsWith("\"") & e[0].trim().endsWith("\"")) || (e[0].trim().startsWith("'") & e[0].trim().endsWith("'")))
+							return e[0].trim().substring(1, e[0].length()-2);
+						else						
+							return e[0].trim();
+						}, e -> {
+							if((e[1].trim().startsWith("\"") & e[1].trim().endsWith("\"")) || (e[1].trim().startsWith("'") & e[1].trim().endsWith("'")))
+								return e[1].trim().substring(1, e[1].length()-2);
+							else						
+								return e[1].trim();
+						})));
 		}
 		
 		return getNewIniFileInstance(tmpSettings);

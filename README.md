@@ -41,7 +41,7 @@ Currently the Library is able to parse simple ini-Files. If it detects duplicate
 will throw an *unchecked* `DuplicateEntryException`.
 
 Comments starting with `;` or `#` are ignored as well as empty lines.\
-The Characters `"`, `'` and `|` are replaced with empty Characters (`""`).
+Leading `"` and `'` are deleted for Kays and Values.
 
 Here is a sample *test.ini* as it is used by my *JUnit*-Tests:
 
@@ -57,5 +57,8 @@ Three = 3
 [Section_2]
 key = value
 key_2 = "value 2"
-key_3 = 'value 3'
+"key_3" = 'value 3'
+
+[Section 3]
+another key with spaces=value|With'Stupid|Separators 
 ```
