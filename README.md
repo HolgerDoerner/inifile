@@ -8,7 +8,10 @@
 
 ## Description
 
-Small Java-Library for processing ini-Files.
+Small and simple Java-Library for processing Configuration-Files in the INI-Format (.ini, .cfg, .config, ...) witch contain Section-Headers
+and simple Key-Value pairs.
+
+For parsing similar Files without Section-Headers, see [java.util.Properties](https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html).
 
 The Factory `IniFiles` for parsing ini-Files and obtaining Objects of type `IniFile`, witch is an Interface.
 
@@ -31,11 +34,9 @@ catch (IOException e) {
 
 The Factory-Class `IniFiles` defines 1 static method, witch is overloaded multiple times:
 
-`public IniFile load(Path path) throws IOException { ... }`
-
-`public IniFile load(File file) throws IOException { ... }`
-
-`public IniFile load(String file) throws IOException { ... }`
+	public IniFile load(Path path) throws IOException { ... }
+	public IniFile load(File file) throws IOException { ... }
+	public IniFile load(String file) throws IOException { ... }
 
 Currently the Library is able to parse simple ini-Files. If it detects duplicated Section-Headers or duplicated Keys inside of the same Section, `IniFiles` 
 will throw an *unchecked* `DuplicateEntryException`.

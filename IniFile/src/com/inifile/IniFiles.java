@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,29 +66,57 @@ public final class IniFiles {
 		List<String> sectionNames = new ArrayList<>();
 		List<List<String[]>> entryPairs = new ArrayList<>();
 		
-		List<String> lines = Files.readAllLines(file);
+		boolean isMultilineValue = false;
+		String[] tmpEntryPair = new String[2];
 		
-		for (String s : lines) {
-			if (s.isBlank() || s.startsWith(";") || s.startsWith("#")) {}
+		for (String s : Files.readAllLines(file)) {
+			s = s.trim(); // remove leading and trailing white-spaces first, makes processing easier
+			
+			if (s.isBlank() || s.startsWith(";") || s.startsWith("#")) {} // just skip comments and empty lines
 			else if (s.startsWith("[") & s.endsWith("]")) {
-				String tmp = s.substring(1, s.length()-1)
-						.replaceAll("'", "")
-						.replaceAll("\"", "")
-						.replaceAll("\\|", "")
-						.trim();
+				String tmpSectionName = s.substring(1, s.length()-1).trim();
 				
-				if (sectionNames.contains(tmp)) throw new DuplicateEntryException("Dublicate of Section '" + tmp + "'");
-				
-				sectionNames.add(tmp);
-				entryPairs.add(new ArrayList<>());
+				if (sectionNames.contains(tmpSectionName)) throw new DuplicateEntryException("Dublicate of Section '" + tmpSectionName + "'");
+				else {
+					sectionNames.add(tmpSectionName);
+					entryPairs.add(new ArrayList<>());
+				}
 			}
 			else {
-				String[] tmp = s.split("=");
+				if (! isMultilineValue) {					
+					if (s.contains("=")) {
+						Arrays.fill(tmpEntryPair, ""); // make sure array is empty before re-using it
+						
+						int separatorIndex = s.indexOf("=");
+						tmpEntryPair[0] = s.substring(0, separatorIndex);
+						tmpEntryPair[1] = s.substring(separatorIndex+1);
+						
+						if (tmpEntryPair[1].endsWith("\\")) {
+							tmpEntryPair[1] = tmpEntryPair[1].substring(0, tmpEntryPair[1].length()-1);
+							isMultilineValue = true;
+						}
+					}
 				
-				if (entryPairs.get(sectionNames.size()-1).stream().filter(e -> e[0].equals(tmp[0])).count() > 0)
-					throw new DuplicateEntryException("Dublicate of Key '" + tmp[0] + "'");
-				
-				entryPairs.get(sectionNames.size()-1).add(tmp);
+					if (!isMultilineValue && (entryPairs.get(sectionNames.size()-1).stream().filter(e -> e[0].equals(tmpEntryPair[0])).count() > 0))
+						throw new DuplicateEntryException("Dublicate of Key '" + tmpEntryPair[0] + "'");
+					else if (! isMultilineValue)
+						entryPairs.get(sectionNames.size()-1).add(tmpEntryPair.clone());
+				}
+				else {
+					if (s.endsWith("\\")) {
+						tmpEntryPair[1] = tmpEntryPair[1] + s.substring(0, s.length()-1);
+					}
+					else {
+						tmpEntryPair[1] = tmpEntryPair[1] + s;
+						
+						if (entryPairs.get(sectionNames.size()-1).stream().filter(e -> e[0].equals(tmpEntryPair[0])).count() > 0)
+							throw new DuplicateEntryException("Dublicate of Key '" + tmpEntryPair[0] + "'");
+						else
+							entryPairs.get(sectionNames.size()-1).add(tmpEntryPair.clone());
+						
+						isMultilineValue = false;
+					}
+				}
 			}
 		}
 		
