@@ -144,7 +144,7 @@ public final class IniFiles {
 	
 	/**
 	 * <p>
-	 * Factory-Method for generating an anonymous instance of {@code com.inifile.IniFile}
+	 * Factory-Method generating an anonymous instance of {@code com.inifile.IniFile}
 	 * </p>
 	 * 
 	 * @param _initialSettings_ a {@code Map<String, Map<String, String>>} read from an ini-file
