@@ -76,7 +76,8 @@ public final class IniFiles {
 			else if (s.startsWith("[") & s.endsWith("]")) {
 				String tmpSectionName = s.substring(1, s.length()-1).trim();
 				
-				if (sectionNames.contains(tmpSectionName)) throw new DuplicateEntryException("Dublicate of Section '" + tmpSectionName + "'");
+				if (sectionNames.contains(tmpSectionName))
+					throw new DuplicateEntryException("Dublicate of Section '" + tmpSectionName + "'");
 				else {
 					sectionNames.add(tmpSectionName);
 					entryPairs.add(new ArrayList<>());
@@ -97,7 +98,8 @@ public final class IniFiles {
 						}
 					}
 				
-					if (!isMultilineValue && (entryPairs.get(sectionNames.size()-1).stream().filter(e -> e[0].equals(tmpEntryPair[0])).count() > 0))
+					if (!isMultilineValue &&
+							(entryPairs.get(sectionNames.size()-1).stream().filter(e -> e[0].equals(tmpEntryPair[0])).count() > 0))
 						throw new DuplicateEntryException("Dublicate of Key '" + tmpEntryPair[0] + "'");
 					else if (! isMultilineValue)
 						entryPairs.get(sectionNames.size()-1).add(tmpEntryPair.clone());
@@ -123,12 +125,14 @@ public final class IniFiles {
 		for (int i = 0; i < sectionNames.size(); i++) {
 			tmpSettings.put(sectionNames.get(i), entryPairs.get(i).stream()
 					.collect(Collectors.toMap(e -> {
-						if((e[0].trim().startsWith("\"") & e[0].trim().endsWith("\"")) || (e[0].trim().startsWith("'") & e[0].trim().endsWith("'")))
+						if((e[0].trim().startsWith("\"") & e[0].trim().endsWith("\"")) ||
+								(e[0].trim().startsWith("'") & e[0].trim().endsWith("'")))
 							return e[0].trim().substring(1, e[0].length()-2);
 						else						
 							return e[0].trim();
 						}, e -> {
-							if((e[1].trim().startsWith("\"") & e[1].trim().endsWith("\"")) || (e[1].trim().startsWith("'") & e[1].trim().endsWith("'")))
+							if((e[1].trim().startsWith("\"") & e[1].trim().endsWith("\"")) ||
+									(e[1].trim().startsWith("'") & e[1].trim().endsWith("'")))
 								return e[1].trim().substring(1, e[1].length()-2);
 							else						
 								return e[1].trim();
